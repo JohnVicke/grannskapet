@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
+  Column,
 } from "typeorm";
 
 @ObjectType()
@@ -13,6 +14,14 @@ export class Company extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
+
+  @Field()
+  @Column()
+  name: string;
+
+  @Field()
+  @Column()
+  verified: boolean;
 
   @Field(() => String)
   @CreateDateColumn()
