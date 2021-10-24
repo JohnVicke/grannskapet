@@ -5,29 +5,28 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { User, GroupMember } from ".";
+import { User } from ".";
 
 @ObjectType()
 @Entity()
-export class Group extends BaseEntity {
+export class GroupPost extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Field()
-  @Column({ unique: true })
-  name!: string;
+  @Column()
+  title: string;
 
-  @Field(() => [GroupMember])
-  @OneToMany(() => GroupMember, (groupMember) => groupMember.group)
-  members: GroupMember[];
+  @Field()
+  @Column()
+  message: string;
 
   @Field(() => User)
-  @ManyToOne(() => User, (user) => user.groups)
+  @ManyToOne(() => User, (user) => user.groupPosts)
   creator: User;
 
   @Field()

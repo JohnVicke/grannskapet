@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { GroupMember } from "./index";
+import { GroupMember, Group, GroupPost } from ".";
 
 @ObjectType()
 @Entity()
@@ -24,6 +24,14 @@ export class User extends BaseEntity {
   @Field(() => [GroupMember])
   @OneToMany(() => GroupMember, (groupMember) => groupMember.user)
   groupMembers: GroupMember[];
+
+  @Field(() => [Group])
+  @OneToMany(() => Group, (group) => group.creator)
+  groups: Group[];
+
+  @Field(() => [GroupPost])
+  @OneToMany(() => GroupPost, (groupPost) => groupPost.creator)
+  groupPosts: GroupPost[];
 
   @Field(() => String)
   @CreateDateColumn()

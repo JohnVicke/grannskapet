@@ -6,8 +6,9 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   Entity,
+  Column,
 } from "typeorm";
-import { User, Group } from "./index";
+import { User, Group } from ".";
 
 @ObjectType()
 @Entity()
@@ -23,6 +24,14 @@ export class GroupMember extends BaseEntity {
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.groupMembers)
   user: User;
+
+  @Field()
+  @Column()
+  userId: number;
+
+  @Field()
+  @Column()
+  groupId: number;
 
   @Field(() => String)
   @CreateDateColumn()
