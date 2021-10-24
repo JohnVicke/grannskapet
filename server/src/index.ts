@@ -13,6 +13,7 @@ import { Context } from "./types";
 import { populateDb } from "./utils/populateDb";
 import { purgeDb } from "./utils/purgeDb";
 import { SubscriptionServer } from "subscriptions-transport-ws";
+import { getApolloConfig } from "./utils/getApolloConfig";
 
 const PORT = process.env.PORT;
 const POPULATE_DB = false;
@@ -22,29 +23,19 @@ const PURGE_DB = false;
   await createConnection(connectionOptions);
   if (PURGE_DB) await purgeDb();
   if (POPULATE_DB) await populateDb();
-
   const app = express();
-  const schema = await buildSchema(buildSchemaOptions);
   app.use(cors());
 
-  const apolloServer = new ApolloServer({
-    schema,
-    context: ({ req, res }): Context => ({
-      req,
-      res,
-    }),
-    plugins: [
-      {
-        async serverWillStart() {
-          return {
-            async drainServer() {
-              subscriptionServer.close();
-            },
-          };
-        },
-      },
-    ],
-  });
+  const schema = await buildSchema(buildSchemaOptions);
+  const httpServer = http.createServer(app);
+  const subscriptionServer = SubscriptionServer.create(
+    { execute, subscribe, schema },
+    { server: httpServer, path: "/graphql" }
+  );
+
+  const apolloServer = new ApolloServer(
+    getApolloConfig(schema, subscriptionServer)
+  );
 
   await apolloServer.start();
   apolloServer.applyMiddleware({ app, cors: false });
@@ -57,17 +48,15 @@ const PURGE_DB = false;
     });
   });
 
-  const httpServer = http.createServer(app);
-  const subscriptionServer = SubscriptionServer.create(
-    { execute, subscribe, schema },
-    { server: httpServer, path: apolloServer.graphqlPath }
-  );
-
   httpServer.listen(
     typeof PORT === "string" ? parseInt(PORT, 10) : 4000,
     () => {
       console.log(
-        `\n\nServer started!\n    port: ${PORT}\n\nAccess graphqlserver on:\n    url: http://localhost:${PORT}${apolloServer.graphqlPath}\n\n`
+        `
+        Server started!
+          port: ${PORT}
+          http: http://localhost:${PORT}${apolloServer.graphqlPath}
+          ws:   ws://localhost:${PORT}${apolloServer.graphqlPath}\n\n`
       );
     }
   );
