@@ -1,12 +1,14 @@
 import React from 'react';
-import { Text, View } from '../components/Themed';
+import { Button } from '../components/Button';
+import { View } from '../components/Themed';
 
 interface LoadingScreenProps {}
 
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({}) => {
   return (
     <View>
-      <Text>hello </Text>
+      <Button>Logga in</Button>
+      <Button variant="outlined">Logga in</Button>
     </View>
   );
 };
