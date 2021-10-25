@@ -9,7 +9,6 @@ import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 import { connectionOptions } from "./utils/connectionOptions";
 import { buildSchemaOptions } from "./utils/buildSchemaOptions";
-import { Context } from "./types";
 import { populateDb } from "./utils/populateDb";
 import { purgeDb } from "./utils/purgeDb";
 import { SubscriptionServer } from "subscriptions-transport-ws";
