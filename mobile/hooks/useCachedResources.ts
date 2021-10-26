@@ -18,7 +18,8 @@ export default function useCachedResources() {
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
           'raleway-regular': require('../assets/fonts/Raleway-Regular.ttf'),
           'raleway-bold': require('../assets/fonts/Raleway-Bold.ttf'),
-          'playfair-bold': require('../assets/fonts/PlayfairDisplay-Bold.ttf')
+          'playfair-bold': require('../assets/fonts/PlayfairDisplay-Bold.ttf'),
+          fontello: require('../assets/fonts/fontello.ttf')
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

@@ -28,6 +28,19 @@ const Container = styled.TouchableOpacity<ContainerProps>`
 
   display: flex;
   align-items: center;
+  flex-direction: row;
+  margin-left: auto;
+  justify-content: center;
+`;
+
+const IconLeftContainer = styled.View`
+  position: absolute;
+  left: 20px;
+`;
+
+const IconRightContainer = styled.View`
+  position: absolute;
+  right: 20px;
 `;
 
 export const Button: React.FC<ButtonProps> = ({
@@ -44,9 +57,9 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <Container fullWidth={fullWidth} variant={variant} hasIcon={hasIcon}>
-      {!!IconLeft && <IconLeft />}
+      <IconLeftContainer>{!!IconLeft && <IconLeft />}</IconLeftContainer>
       <Text color={textColor()}>{children}</Text>
-      {!!IconRight && <IconRight />}
+      <IconRightContainer>{!!IconRight && <IconRight />}</IconRightContainer>
     </Container>
   );
 };
