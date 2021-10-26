@@ -18,7 +18,7 @@ const StyledText = styled.Text<StyledTextProps>`
 export const Text: React.FC<TextProps> = ({
   header = false,
   children,
-  color = colors.gray
+  color = colors.black
 }) => {
   return (
     <StyledText header={header} color={color}>

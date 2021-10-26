@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { LoadingScreen } from '../../screens/LoadingScreen';
+import { LoginScreen } from '../../screens/LoginScreen';
 import ModalScreen from '../../screens/ModalScreen';
 import NotFoundScreen from '../../screens/NotFoundScreen';
 import { NotAuthStackParamList } from './types';
@@ -10,7 +10,7 @@ export const NonAuthNavigator: React.FC = () => {
     createNativeStackNavigator<NotAuthStackParamList>();
   return (
     <Navigator>
-      <Screen name="Root" component={LoadingScreen} />
+      <Screen name="Root" component={LoginScreen} />
       <Screen
         name="NotFound"
         component={NotFoundScreen}
