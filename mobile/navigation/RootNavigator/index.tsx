@@ -15,19 +15,20 @@ import {
   RootTabScreenProps
 } from './types';
 
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const { Navigator, Screen, Group } =
+  createBottomTabNavigator<RootTabParamList>();
 
 const BottomTabNavigator = () => {
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator
+    <Navigator
       initialRouteName="TabOne"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint
       }}
     >
-      <BottomTab.Screen
+      <Screen
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
@@ -50,7 +51,7 @@ const BottomTabNavigator = () => {
           )
         })}
       />
-      <BottomTab.Screen
+      <Screen
         name="TabTwo"
         component={TabTwoScreen}
         options={{
@@ -58,15 +59,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />
         }}
       />
-      <BottomTab.Screen
-        name="Mobile"
-        component={TabTwoScreen}
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />
-        }}
-      />
-    </BottomTab.Navigator>
+    </Navigator>
   );
 };
 

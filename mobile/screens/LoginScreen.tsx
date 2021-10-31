@@ -1,14 +1,15 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Button } from '../components/Button';
 import { Layout } from '../components/Layout';
 import { TextInputField } from '../components/TextInputField';
 import styled from 'styled-components/native';
-import { space } from '../utils/theme';
 import { Icon } from '../components/Icon';
+import { useAuth0 } from '../hooks/useAuth0';
+import { useMeQuery } from '../generated/graphql';
 
 const Form = styled.View`
-  margin-bottom: ${({ theme }) => theme.space[0]};
+  margin-bottom: ${(props) => props.theme.space[0]};
 `;
 
 const Divider = styled.View`
@@ -37,11 +38,15 @@ type FormFieldTypes = {
 interface LoginScreenProps {}
 
 export const LoginScreen: React.FC<LoginScreenProps> = ({}) => {
+  const { data, loading, error } = useMeQuery();
+  console.log(data);
   const {
     control,
     handleSubmit,
     formState: { errors, isValid }
   } = useForm({ mode: 'onBlur' });
+
+  const { auth0LoginScreen } = useAuth0();
 
   const onSubmit = ({ email, password }: FormFieldTypes) => {
     console.log(email, password);
@@ -76,7 +81,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({}) => {
       <Button
         variant="ghost"
         IconLeft={() => <Icon name="facebook" />}
-        onPress={() => undefined}
+        onPress={auth0LoginScreen}
       >
         Fortsätt med Facebook
       </Button>
@@ -84,7 +89,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({}) => {
         my={1}
         variant="ghost"
         IconLeft={() => <Icon name="google" />}
-        onPress={() => undefined}
+        onPress={auth0LoginScreen}
       >
         Fortsätt med Google
       </Button>

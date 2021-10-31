@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { ColorSchemeName } from 'react-native';
 import { LoadingScreen } from '../screens/LoadingScreen';
-import LinkingConfiguration from './LinkingConfiguration';
+import { NotAuthLinking, RootLinking } from './LinkingConfiguration';
 import { NonAuthNavigator } from './NonAuthNavigator';
 import { RootNavigator } from './RootNavigator';
 
@@ -28,9 +28,17 @@ export default function Navigation({
   if (loading) {
     return <LoadingScreen />;
   }
+
+  if (!isAuth) {
+    return (
+      <NavigationContainer linking={NotAuthLinking}>
+        <NonAuthNavigator />
+      </NavigationContainer>
+    );
+  }
   return (
-    <NavigationContainer linking={LinkingConfiguration}>
-      {!isAuth ? <NonAuthNavigator /> : <RootNavigator />}
+    <NavigationContainer linking={RootLinking}>
+      <RootNavigator />
     </NavigationContainer>
   );
 }

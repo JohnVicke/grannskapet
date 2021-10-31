@@ -1,16 +1,16 @@
-import { User } from "../../entities";
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import { FullUserResponse, UserInput, UserResponse } from "./types";
+import { Arg, Mutation, Query, Resolver } from 'type-graphql';
+import { User } from '../../entities';
+import { FullUserResponse, UserInput, UserResponse } from './types';
 
 @Resolver(User)
 export class UserResolver {
   @Mutation(() => UserResponse)
-  async register(@Arg("input") userInput: UserInput): Promise<UserResponse> {
+  async register(@Arg('input') userInput: UserInput): Promise<UserResponse> {
     const { username } = userInput;
     const user = await User.create({ username }).save();
     if (!user) {
       return {
-        errors: [{ field: "500", message: "Internal server error" }],
+        errors: [{ field: '500', message: 'Internal server error' }]
       };
     }
     return { user };
@@ -19,16 +19,27 @@ export class UserResolver {
   @Query(() => UserResponse)
   async me(): Promise<UserResponse> {
     const userId = 1;
+
     const user = await User.findOne(userId, {
-      relations: ["groupMembers"],
+      relations: ['groupMembers']
     });
+    if (!user)
+      return {
+        errors: [
+          {
+            field: 'tunnel',
+            message: 'no user found'
+          }
+        ]
+      };
+
     return { user };
   }
 
   @Query(() => FullUserResponse)
   async getUser(): Promise<FullUserResponse> {
     const userId = 1;
-    const user = await User.findOne(userId, { relations: ["Group"] });
+    const user = await User.findOne(userId, { relations: ['Group'] });
     console.log(user);
     return { user };
   }

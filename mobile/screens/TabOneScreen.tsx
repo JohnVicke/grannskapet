@@ -36,7 +36,6 @@ export default function TabOneScreen({
 
   const login = async () => {
     const redirectUrl = makeRedirectUri({ useProxy: true }) + '/TabOne';
-    console.log(redirectUrl);
     const queryParams = toQueryString({
       client_id: clientId,
       redirect_uri: redirectUrl,

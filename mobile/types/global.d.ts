@@ -1,4 +1,4 @@
-import { theme } from './utils/theme';
+import { theme } from '../utils/theme';
 
 type ThemeInterface = typeof theme;
 
@@ -7,6 +7,7 @@ declare module 'styled-components/native' {
 }
 
 declare module '@env' {
-  const AUTH0_DOMAIN: string;
-  const AUTH0_CLIENT_ID: string;
+  export const AUTH0_DOMAIN: string;
+  export const AUTH0_CLIENT_ID: string;
+  export const AUTH0_AUDIENCE: string;
 }

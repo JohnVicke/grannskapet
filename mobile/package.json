@@ -1,9 +1,4 @@
 {
-  "rnpm": {
-    "assets": [
-      "resources/fonts"
-    ]
-  },
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -11,12 +6,14 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "graphql:gen": "graphql-codegen --config codegen.yml"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.16",
     "@expo/vector-icons": "^12.0.0",
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-navigation/bottom-tabs": "^6.0.5",
@@ -29,9 +26,11 @@
     "expo-font": "~10.0.3",
     "expo-linking": "~2.4.2",
     "expo-random": "~12.0.0",
+    "expo-secure-store": "~11.0.3",
     "expo-splash-screen": "~0.13.3",
     "expo-status-bar": "~1.1.0",
     "expo-web-browser": "~10.0.3",
+    "graphql": "^15.0.0",
     "jwt-decode": "^3.1.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -48,6 +47,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@graphql-codegen/cli": "2.2.1",
+    "@graphql-codegen/typescript": "2.2.4",
+    "@graphql-codegen/typescript-operations": "2.1.8",
+    "@graphql-codegen/typescript-react-apollo": "3.1.6",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
     "@types/react-native-vector-icons": "^6.4.9",

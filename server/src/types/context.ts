@@ -1,6 +1,7 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 export type Context = {
   req: Request;
   res: Response;
+  isAuth: boolean;
 };

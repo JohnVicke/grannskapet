@@ -11,7 +11,8 @@ interface TextProps {
 type StyledTextProps = Partial<TextProps> & {};
 
 const StyledText = styled.Text<StyledTextProps>`
-  font-family: ${(props) => (props.header ? 'playfair-bold' : 'raleway-bold')};
+  font-family: ${(props) =>
+    props.header ? 'playfair-bold' : 'raleway-regular'};
   color: ${(props) => props.color};
 `;
 

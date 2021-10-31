@@ -9,7 +9,6 @@ import {
   NavigatorScreenParams
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ThemedStyledProps, ThemeProviderProps } from 'styled-components';
 
 declare global {
   namespace ReactNavigation {
@@ -37,12 +36,3 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
     BottomTabScreenProps<RootTabParamList, Screen>,
     NativeStackScreenProps<RootStackParamList>
   >;
-
-export type NotAuthParamList = {
-  NotAuthRoot: undefined;
-};
-export type NotAuthStackParamList = {
-  Root: NavigatorScreenParams<NotAuthParamList> | undefined;
-  Modal: undefined;
-  NotFound: undefined;
-};
