@@ -7,6 +7,7 @@
 
 
 ## Structure
+[Go to kanban board](https://github.com/JohnVicke/grannskapet/projects/1)
 
 ### Code
 | Codebase | Responsibility |
