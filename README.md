@@ -20,5 +20,8 @@
 | [figma](https://www.figma.com/file/81djUKJk7RyiaB8nrIU9Sm/Grannskapet) | Mobile design|   
 
 ## Branches
-* master --> production build
-* dev --> dev enviornment
+<pre>
+ master  ▶️ production build
+ dev     ▶️ pre-production/test build
+</pre>
+
