@@ -10,7 +10,6 @@ export const getApolloConfig = (
   return {
     schema,
     context: async ({ req, res }: Context) => {
-      // refactor into middleware
       return { req, res };
     },
     plugins: [

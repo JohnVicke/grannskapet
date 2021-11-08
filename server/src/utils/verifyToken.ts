@@ -10,6 +10,7 @@ export const verifyToken = async (bearerToken: string) => {
   const getJwksClientKey = async (header: any, cb: any) => {
     console.log('header', header);
     client.getSigningKey(header.kid, (err, key) => {
+      console.error(err);
       const signingKey = key.getPublicKey();
       cb(null, signingKey);
     });
