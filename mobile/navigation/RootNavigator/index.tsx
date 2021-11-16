@@ -1,7 +1,7 @@
+import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
 import { Pressable } from 'react-native';
 import useColorScheme from '../../hooks/useColorScheme';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -14,6 +14,7 @@ import {
   RootTabParamList,
   RootTabScreenProps
 } from './types';
+import { Icon } from '../../components/Icon';
 
 const { Navigator, Screen, Group } =
   createBottomTabNavigator<RootTabParamList>();
@@ -32,8 +33,9 @@ const BottomTabNavigator = () => {
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: () => <Icon name="facebook" />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -56,7 +58,7 @@ const BottomTabNavigator = () => {
         component={TabTwoScreen}
         options={{
           title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />
+          tabBarIcon: () => <Icon name="google" />
         }}
       />
     </Navigator>

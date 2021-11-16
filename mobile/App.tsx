@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ApolloClient,
   ApolloLink,
@@ -9,13 +10,13 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { getItemAsync } from 'expo-secure-store';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NativeBaseProvider } from 'native-base';
 import { ThemeProvider } from 'styled-components';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
-import { theme } from './utils/theme';
+import nativeBaseTheme, { theme } from './utils/theme';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const errorLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors) graphQLErrors.map(({ message }) => console.error(message));
@@ -51,14 +52,17 @@ export default function App() {
   if (!isLoadingComplete) {
     return null;
   }
+
   return (
-    <ApolloProvider client={client}>
-      <SafeAreaProvider>
+    <NativeBaseProvider theme={nativeBaseTheme}>
+      <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
-          <Navigation colorScheme={colorScheme} />
+          <SafeAreaProvider>
+            <Navigation colorScheme={colorScheme} />
+          </SafeAreaProvider>
           <StatusBar />
         </ThemeProvider>
-      </SafeAreaProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </NativeBaseProvider>
   );
 }

@@ -39,29 +39,7 @@ export const NotAuthLinking: LinkingOptions<NotAuthStackParamList> = {
     }
   },
   getStateFromPath: (path, opts) => {
-    const split = path.split('#');
-    if (split[0].startsWith('expo-auth-session')) {
-      const params = {
-        provider: '',
-        token: ''
-      };
-      if (split[1].includes('id_token')) {
-        params.provider = 'google';
-        params.token = split[1].split('=')[1];
-      } else if (split[1].includes('access_token')) {
-        params.provider = 'facebook';
-        params.token = split[1].split('&')[0].split('=')[1];
-      }
-      return {
-        routes: [
-          {
-            name: 'Redirect',
-            path: 'redirect',
-            params
-          }
-        ]
-      };
-    }
+    console.log('[getStateFromPath]:', path, opts);
     return getStateFromPath(path, opts);
   }
 };

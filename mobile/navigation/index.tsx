@@ -7,6 +7,7 @@ import { LoadingScreen } from '../screens/LoadingScreen';
 import { NotAuthLinking, RootLinking } from './LinkingConfiguration';
 import { NonAuthNavigator } from './NonAuthNavigator';
 import { RootNavigator } from './RootNavigator';
+import { Box } from 'native-base';
 
 export default function Navigation({
   colorScheme
@@ -29,7 +30,7 @@ export default function Navigation({
     return <LoadingScreen />;
   }
 
-  if (!isAuth) {
+  if (isAuth) {
     return (
       <NavigationContainer linking={NotAuthLinking}>
         <NonAuthNavigator />

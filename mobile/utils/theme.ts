@@ -1,3 +1,5 @@
+import { extendTheme } from 'native-base';
+
 export const colors = {
   primary: '#33A962',
   background: '#FBFFFA',
@@ -21,3 +23,10 @@ export const theme = {
     default: '0px 2px 6px 1px rgba(26, 88, 21, 0.1)'
   }
 };
+
+const config = {
+  useSystemColorMode: false,
+  initialColorMode: 'light'
+};
+
+export default extendTheme({ config });

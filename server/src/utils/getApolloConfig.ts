@@ -9,10 +9,10 @@ export const getApolloConfig = (
 ): Config<ExpressContext> => {
   return {
     schema,
-    context: async ({ req, res }: Context) => {
-      // refactor into middleware
-      return { req, res };
-    },
+    context: async ({ req, res }: Context) => ({
+      req,
+      res
+    }),
     plugins: [
       {
         async serverWillStart() {
